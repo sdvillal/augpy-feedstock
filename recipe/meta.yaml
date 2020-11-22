@@ -16,6 +16,7 @@ build:
   noarch: python
   skip: True  # [not linux or cuda_compiler_version not in ("10.1", "10.2")]
   script:
+    # N.B. cub is in conda-forge, cnmem is not
     - "git submodule -q sync"
     - "git submodule -q update --init --recursive"
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
