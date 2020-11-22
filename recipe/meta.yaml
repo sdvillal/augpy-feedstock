@@ -41,7 +41,7 @@ requirements:
     #   - or do we enforce the right CUDA version to be in the environment?
     # for the time being, let's enforce
     # (but we should provide an exit scape, e.g. a no-enforced-cuda package)
-    - cudatoolkit ={{ cuda_compiler_version }}
+    - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*
 
 test:
   imports:
