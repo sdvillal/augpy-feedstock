@@ -13,7 +13,6 @@ source:
 
 build:
   number: 0
-  noarch: python
   skip: True  # [not linux or cuda_compiler_version not in ("10.1", "10.2")]
   script:
     # N.B. cub is in conda-forge, cnmem is not
@@ -27,25 +26,26 @@ requirements:
     - {{ compiler('cuda') }}
     - cmake
   host:
-    - python >=3.6
+    - python >=3.7
     - pip
     - setuptools >=44.0.0
     - pybind11 >=2.4.3,<3.0.0
     - pybind11-stubgen >=0.3.0,<1.0.0
     - numpy >=1.17.5,<2.0.0
   run:
-    - python >=3.6
+    - python >=3.7
     - numpy >=1.17.5,<2.0.0
     # N.B. this is debatable:
     #   - do we let the user choose a system-wide install?
     #   - or do we enforce the right CUDA version to be in the environment?
     # for the time being, let's enforce
-    # (but we should provide an exit scape, e.g. a no-enforced-cuda package)
+    # (but we should provide an exit escape, e.g. a no-enforced-cuda package)
     - cudatoolkit {{ cuda_compiler_version }}|{{ cuda_compiler_version }}.*
 
 test:
   imports:
     - augpy
+    # to do something more meaningful we would need a CUDA capable CI instance
 
 about:
   home: https://gitlab.com/jfolz/augpy
