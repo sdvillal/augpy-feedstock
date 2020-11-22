@@ -43,6 +43,10 @@ requirements:
     # (but we should provide an exit scape, e.g. a no-enforced-cuda package)
     - cudatoolkit ={{ cuda_compiler_version }}
 
+test:
+  imports:
+    - augpy
+
 about:
   home: https://gitlab.com/jfolz/augpy
   license: MIT
