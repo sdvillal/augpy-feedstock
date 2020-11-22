@@ -26,15 +26,15 @@ requirements:
     - {{ compiler('cuda') }}
     - cmake
   host:
-    - python >=3.7
+    - python
     - pip
     - setuptools >=44.0.0
     - pybind11 >=2.4.3,<3.0.0
     - pybind11-stubgen >=0.3.0,<1.0.0
-    - numpy >=1.17.5,<2.0.0
+    - numpy
   run:
-    - python >=3.7
-    - numpy >=1.17.5,<2.0.0
+    - python
+    - numpy
     # N.B. this is debatable:
     #   - do we let the user choose a system-wide install?
     #   - or do we enforce the right CUDA version to be in the environment?
