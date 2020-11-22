@@ -1,12 +1,3 @@
-# This recipe is wildly failing as I need to get up to date with the state of CUDA in CF
-# First check dependencies here (note build-requirements.txt):
-#   - https://gitlab.com/jfolz/augpy
-# Some googling:
-#   - Managing CUDA dependencies: https://towardsdatascience.com/managing-cuda-dependencies-with-conda-89c5d817e7e1
-#   - Documenting GPU builds: https://github.com/conda-forge/conda-forge.github.io/issues/901
-#   - nvidia-apex recipe: https://github.com/conda-forge/nvidia-apex-feedstock/blob/master/recipe/meta.yaml
-#   - pytorch-sparse recipe: https://github.com/conda-forge/pytorch_sparse-feedstock/blob/master/recipe/meta.yaml
-
 # Current release in pypi is kinda broken...
 {% set commit="018c67df5537269f00826d2fa53dccd669fd59ce" %}
 {% set version="1.0.0a2+git0" %}  # bump this each time we update the commit without changing target version
@@ -23,7 +14,7 @@ source:
 build:
   number: 0
   noarch: python
-  skip: True  # [not linux or cuda_compiler_version not in ("10.0", "10.1", "10.2", "11.0")]
+  skip: True  # [not linux or cuda_compiler_version not in ("10.1", "10.2")]
   script:
     - "git submodule -q sync"
     - "git submodule -q update --init --recursive"
