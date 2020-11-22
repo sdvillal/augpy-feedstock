@@ -16,14 +16,17 @@ package:
   version: {{ version }}
 
 source:
-  url: https://gitlab.com/jfolz/augpy/-/archive/{{ commit }}/augpy-{{ commit }}.tar.gz
-  sha256: 9cb80d7f91a179d194e0876eedce46a8cbea40c3d3b3e5ae9f4d15451ff55b52
+  git_url: https://gitlab.com/jfolz/augpy.git
+  git_rev: {{ commit }}
+  git_depth: 1
 
 build:
   number: 0
   noarch: python
   skip: True  # [not linux or cuda_compiler_version not in ("10.0", "10.1", "10.2", "11.0")]
   script:
+    - "git submodule -q sync"
+    - "git submodule -q update --init --recursive"
     - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
