@@ -1,0 +1,54 @@
+# This recipe is wildly failing as I need to get up to date with the state of CUDA in CF
+# First check dependencies here (note build-requirements.txt):
+#   - https://gitlab.com/jfolz/augpy
+# Some googling:
+#   - Managing CUDA dependencies: https://towardsdatascience.com/managing-cuda-dependencies-with-conda-89c5d817e7e1
+#   - Documenting GPU builds: https://github.com/conda-forge/conda-forge.github.io/issues/901
+#   - nvidia-apex recipe: https://github.com/conda-forge/nvidia-apex-feedstock/blob/master/recipe/meta.yaml
+#   - pytorch-sparse recipe: https://github.com/conda-forge/pytorch_sparse-feedstock/blob/master/recipe/meta.yaml
+
+# Current release in pypi is kinda broken...
+{% set commit="018c67df5537269f00826d2fa53dccd669fd59ce" %}
+{% set version="1.0.0a2+git0" %}  # bump this each time we update the commit without changing target version
+
+package:
+  name: augpy
+  version: {{ version }}
+
+source:
+  url: https://gitlab.com/jfolz/augpy/-/archive/{{ commit }}/augpy-{{ commit }}.tar.gz
+  sha256: 9cb80d7f91a179d194e0876eedce46a8cbea40c3d3b3e5ae9f4d15451ff55b52
+
+build:
+  number: 0
+  noarch: python
+  skip: True  # [not linux or cuda_compiler_version not in ("10.0", "10.1", "10.2", "11.0")]
+  script:
+    - "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}
+    - cmake
+  host:
+    - python >=3.6
+    - pip
+    - setuptools >=44.0.0
+    - pybind11 >=2.4.3,<3.0.0
+    - pybind11-stubgen >=0.3.0,<1.0.0
+    - numpy >=1.17.5,<2.0.0
+  run:
+    - python >=3.6
+    - numpy >=1.17.5,<2.0.0
+
+about:
+  home: https://gitlab.com/jfolz/augpy
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: augpy is a lightweight library with minimal dependencies that provides a comprehensive tensor implementation for Cuda-enabled GPUs
+
+extra:
+  recipe-maintainers:
+    - sdvillal
