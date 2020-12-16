@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [not linux or cuda_compiler_version not in ("10.1", "10.2")]
+  skip: True  # [not linux or cuda_compiler_version not in ("10.1", "10.2", "11.0")]
   script:
     # N.B. cub is in conda-forge, cnmem is not
     - "git submodule -q sync"
