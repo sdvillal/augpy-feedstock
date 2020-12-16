@@ -1,6 +1,6 @@
 # Current release in pypi is kinda broken...
-{% set commit="018c67df5537269f00826d2fa53dccd669fd59ce" %}
-{% set version="1.0.0a2+git0" %}  # bump this each time we update the commit without changing target version
+{% set commit="e2b0543d453a3c088cd7e6199c5a526a567877da" %}
+{% set version="1.0.0a2+git1" %}  # bump this each time we update the commit without changing target version
 
 package:
   name: augpy
